@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch } from 'react-redux';
+import { useReduxStore } from './store/hook';
+import { initStore } from './store/reducers';
+import { fetchJokeRequest } from './store/watchers/jokes-watcher';
+import { Container, JokeItem, MoreButton } from './style';
 
-function App() {
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const jokes = useReduxStore(store => store.jokes.jokesList);
+
+  React.useEffect(() => {
+    dispatch(initStore());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <MoreButton onClick={() => dispatch(fetchJokeRequest())}>MORE!!!</MoreButton>
+      {
+        jokes.map(joke => (
+          <JokeItem key={joke.id}>
+            {joke.text}
+          </JokeItem>
+        ))
+      }
+    </Container>
   );
 }
 
