@@ -5,10 +5,10 @@ import {
   Joke,
   AddJoke,
   SetJokes,
-} from '../types';
+} from "../types";
 
 const initialState: JokesState = {
-  jokesList: []
+  jokesList: [],
 };
 
 export default (state = initialState, action: JokesAction): JokesState => {
@@ -24,7 +24,7 @@ export default (state = initialState, action: JokesAction): JokesState => {
         ...state,
         jokesList: action.payload,
       };
-  
+
     default:
       return state;
   }

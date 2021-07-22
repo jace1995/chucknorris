@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import { StoreTypes } from '../types';
-import jokesReducer from './jokes-reducer';
+import { combineReducers } from "redux";
+import { InitStore, StoreTypes } from "../types";
+import jokesReducer from "./jokes-reducer";
 
 const rootReducer = combineReducers({
   jokes: jokesReducer,
@@ -8,8 +8,8 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const initStore = () => ({
-  type: StoreTypes.INIT_STORE
-})
+export const initStore = (): InitStore => ({
+  type: StoreTypes.INIT_STORE,
+});
 
 export default rootReducer;
